@@ -1,4 +1,5 @@
-import { afterNextRender, Component, effect } from '@angular/core';
+import { afterNextRender, Component, effect, signal } from '@angular/core';
+import { Title } from '../../components/title/title';
 
 const log = (...messages: string[]) => {
   console.log(
@@ -8,10 +9,21 @@ const log = (...messages: string[]) => {
 };
 @Component({
   selector: 'app-home-page',
-  imports: [],
+  imports: [Title],
   templateUrl: './home-page.html',
 })
 export class HomePage {
+  traditionalProperty = 'Francisco';
+  signalProperty = signal('Francisco');
+
+  cambiarSignal() {
+    this.signalProperty.set('Francisco Morales');
+  }
+
+  cambiarTradicional() {
+    this.traditionalProperty = 'Francisco Morales';
+  }
+
   constructor() {
     log('constructor llamado');
   }
